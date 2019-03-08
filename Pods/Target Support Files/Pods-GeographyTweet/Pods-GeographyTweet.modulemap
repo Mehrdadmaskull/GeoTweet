@@ -1,0 +1,6 @@
+framework module Pods_GeographyTweet {
+  umbrella header "Pods-GeographyTweet-umbrella.h"
+
+  export *
+  module * { export * }
+}

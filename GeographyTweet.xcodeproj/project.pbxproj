@@ -7,12 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E018B0022319BCB00789223 /* HelperMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E018AFF22319BCB00789223 /* HelperMethods.swift */; };
+		4E1B8773222E2D3100F94696 /* TwitterOAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1B8772222E2D3100F94696 /* TwitterOAuthViewController.swift */; };
 		4EA40F93222CDD3D00515187 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA40F92222CDD3D00515187 /* AppDelegate.swift */; };
-		4EA40F95222CDD3D00515187 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA40F94222CDD3D00515187 /* ViewController.swift */; };
+		4EA40F95222CDD3D00515187 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA40F94222CDD3D00515187 /* MainViewController.swift */; };
 		4EA40F98222CDD3D00515187 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EA40F96222CDD3D00515187 /* Main.storyboard */; };
 		4EA40F9A222CDD4000515187 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EA40F99222CDD4000515187 /* Assets.xcassets */; };
 		4EA40F9D222CDD4000515187 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EA40F9B222CDD4000515187 /* LaunchScreen.storyboard */; };
 		4EA40FA8222CDD4000515187 /* GeographyTweetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA40FA7222CDD4000515187 /* GeographyTweetTests.swift */; };
+		4EA40FB3222CDF8600515187 /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA40FB2222CDF8600515187 /* Tweet.swift */; };
+		4EA40FB5222CE08D00515187 /* TweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA40FB4222CE08D00515187 /* TweetTableViewCell.swift */; };
+		4EA40FB7222D92D900515187 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EA40FB6222D92D900515187 /* MapKit.framework */; };
+		4EA40FB9222DC29300515187 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA40FB8222DC29300515187 /* NetworkManager.swift */; };
+		4EABF482222DFC1A00FB3A8B /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EABF481222DFC1A00FB3A8B /* AppConfig.swift */; };
+		8B0E03D8EAC44131679A77A5 /* Pods_GeographyTweet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8824C222C36141659B65B5CF /* Pods_GeographyTweet.framework */; };
+		A32986F7E29A149AF1D01B68 /* Pods_GeographyTweetTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD8567CB8ED05A69A51F9A6 /* Pods_GeographyTweetTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,9 +35,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3DD8567CB8ED05A69A51F9A6 /* Pods_GeographyTweetTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GeographyTweetTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E018AFF22319BCB00789223 /* HelperMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperMethods.swift; sourceTree = "<group>"; };
+		4E1B8772222E2D3100F94696 /* TwitterOAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitterOAuthViewController.swift; sourceTree = "<group>"; };
 		4EA40F8F222CDD3D00515187 /* GeographyTweet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeographyTweet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EA40F92222CDD3D00515187 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4EA40F94222CDD3D00515187 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4EA40F94222CDD3D00515187 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		4EA40F97222CDD3D00515187 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4EA40F99222CDD4000515187 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4EA40F9C222CDD4000515187 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -36,6 +48,16 @@
 		4EA40FA3222CDD4000515187 /* GeographyTweetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GeographyTweetTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EA40FA7222CDD4000515187 /* GeographyTweetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeographyTweetTests.swift; sourceTree = "<group>"; };
 		4EA40FA9222CDD4000515187 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4EA40FB2222CDF8600515187 /* Tweet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
+		4EA40FB4222CE08D00515187 /* TweetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetTableViewCell.swift; sourceTree = "<group>"; };
+		4EA40FB6222D92D900515187 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		4EA40FB8222DC29300515187 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		4EABF481222DFC1A00FB3A8B /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
+		6B0E5336531369E78234AD36 /* Pods-GeographyTweetTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GeographyTweetTests.release.xcconfig"; path = "Target Support Files/Pods-GeographyTweetTests/Pods-GeographyTweetTests.release.xcconfig"; sourceTree = "<group>"; };
+		8824C222C36141659B65B5CF /* Pods_GeographyTweet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GeographyTweet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABD6A3829AAA96BD70B0E63D /* Pods-GeographyTweet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GeographyTweet.release.xcconfig"; path = "Target Support Files/Pods-GeographyTweet/Pods-GeographyTweet.release.xcconfig"; sourceTree = "<group>"; };
+		B509CCE45A4FBBF4061E7595 /* Pods-GeographyTweet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GeographyTweet.debug.xcconfig"; path = "Target Support Files/Pods-GeographyTweet/Pods-GeographyTweet.debug.xcconfig"; sourceTree = "<group>"; };
+		C4F35839183DAD4C05BE595F /* Pods-GeographyTweetTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GeographyTweetTests.debug.xcconfig"; path = "Target Support Files/Pods-GeographyTweetTests/Pods-GeographyTweetTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +65,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EA40FB7222D92D900515187 /* MapKit.framework in Frameworks */,
+				8B0E03D8EAC44131679A77A5 /* Pods_GeographyTweet.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A32986F7E29A149AF1D01B68 /* Pods_GeographyTweetTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +87,8 @@
 				4EA40F91222CDD3D00515187 /* GeographyTweet */,
 				4EA40FA6222CDD4000515187 /* GeographyTweetTests */,
 				4EA40F90222CDD3D00515187 /* Products */,
+				AD4892365478F92166407F42 /* Pods */,
+				CB0A634227ECA9577ACD0851 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -78,11 +105,17 @@
 			isa = PBXGroup;
 			children = (
 				4EA40F92222CDD3D00515187 /* AppDelegate.swift */,
-				4EA40F94222CDD3D00515187 /* ViewController.swift */,
+				4EA40F94222CDD3D00515187 /* MainViewController.swift */,
 				4EA40F96222CDD3D00515187 /* Main.storyboard */,
 				4EA40F99222CDD4000515187 /* Assets.xcassets */,
 				4EA40F9B222CDD4000515187 /* LaunchScreen.storyboard */,
 				4EA40F9E222CDD4000515187 /* Info.plist */,
+				4EA40FB2222CDF8600515187 /* Tweet.swift */,
+				4EA40FB4222CE08D00515187 /* TweetTableViewCell.swift */,
+				4EA40FB8222DC29300515187 /* NetworkManager.swift */,
+				4EABF481222DFC1A00FB3A8B /* AppConfig.swift */,
+				4E1B8772222E2D3100F94696 /* TwitterOAuthViewController.swift */,
+				4E018AFF22319BCB00789223 /* HelperMethods.swift */,
 			);
 			path = GeographyTweet;
 			sourceTree = "<group>";
@@ -96,6 +129,27 @@
 			path = GeographyTweetTests;
 			sourceTree = "<group>";
 		};
+		AD4892365478F92166407F42 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B509CCE45A4FBBF4061E7595 /* Pods-GeographyTweet.debug.xcconfig */,
+				ABD6A3829AAA96BD70B0E63D /* Pods-GeographyTweet.release.xcconfig */,
+				C4F35839183DAD4C05BE595F /* Pods-GeographyTweetTests.debug.xcconfig */,
+				6B0E5336531369E78234AD36 /* Pods-GeographyTweetTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		CB0A634227ECA9577ACD0851 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4EA40FB6222D92D900515187 /* MapKit.framework */,
+				8824C222C36141659B65B5CF /* Pods_GeographyTweet.framework */,
+				3DD8567CB8ED05A69A51F9A6 /* Pods_GeographyTweetTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -103,9 +157,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4EA40FAC222CDD4000515187 /* Build configuration list for PBXNativeTarget "GeographyTweet" */;
 			buildPhases = (
+				C78E9C6FBFC64D77A9DC040A /* [CP] Check Pods Manifest.lock */,
 				4EA40F8B222CDD3D00515187 /* Sources */,
 				4EA40F8C222CDD3D00515187 /* Frameworks */,
 				4EA40F8D222CDD3D00515187 /* Resources */,
+				13D71E99831FCFBF9A967DE6 /* [CP] Embed Pods Frameworks */,
+				F7BB9061B59E5980EA34AD25 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -120,6 +177,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4EA40FAF222CDD4000515187 /* Build configuration list for PBXNativeTarget "GeographyTweetTests" */;
 			buildPhases = (
+				5C7D82B25CC31AA8A5C9A5C4 /* [CP] Check Pods Manifest.lock */,
 				4EA40F9F222CDD4000515187 /* Sources */,
 				4EA40FA0222CDD4000515187 /* Frameworks */,
 				4EA40FA1222CDD4000515187 /* Resources */,
@@ -146,6 +204,11 @@
 				TargetAttributes = {
 					4EA40F8E222CDD3D00515187 = {
 						CreatedOnToolsVersion = 10.2;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					4EA40FA2222CDD4000515187 = {
 						CreatedOnToolsVersion = 10.2;
@@ -192,12 +255,116 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		13D71E99831FCFBF9A967DE6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GeographyTweet/Pods-GeographyTweet-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
+				"${BUILT_PRODUCTS_DIR}/OAuthSwift/OAuthSwift.framework",
+				"${PODS_ROOT}/TwitterCore/iOS/TwitterCore.framework",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OAuthSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GeographyTweet/Pods-GeographyTweet-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5C7D82B25CC31AA8A5C9A5C4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GeographyTweetTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C78E9C6FBFC64D77A9DC040A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GeographyTweet-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F7BB9061B59E5980EA34AD25 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GeographyTweet/Pods-GeographyTweet-resources.sh",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TwitterKitResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GeographyTweet/Pods-GeographyTweet-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4EA40F8B222CDD3D00515187 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4EA40F95222CDD3D00515187 /* ViewController.swift in Sources */,
+				4EA40FB5222CE08D00515187 /* TweetTableViewCell.swift in Sources */,
+				4EA40FB3222CDF8600515187 /* Tweet.swift in Sources */,
+				4E018B0022319BCB00789223 /* HelperMethods.swift in Sources */,
+				4EA40FB9222DC29300515187 /* NetworkManager.swift in Sources */,
+				4E1B8773222E2D3100F94696 /* TwitterOAuthViewController.swift in Sources */,
+				4EABF482222DFC1A00FB3A8B /* AppConfig.swift in Sources */,
+				4EA40F95222CDD3D00515187 /* MainViewController.swift in Sources */,
 				4EA40F93222CDD3D00515187 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -358,6 +525,7 @@
 		};
 		4EA40FAD222CDD4000515187 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B509CCE45A4FBBF4061E7595 /* Pods-GeographyTweet.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -376,6 +544,7 @@
 		};
 		4EA40FAE222CDD4000515187 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ABD6A3829AAA96BD70B0E63D /* Pods-GeographyTweet.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -394,6 +563,7 @@
 		};
 		4EA40FB0222CDD4000515187 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C4F35839183DAD4C05BE595F /* Pods-GeographyTweetTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -415,6 +585,7 @@
 		};
 		4EA40FB1222CDD4000515187 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6B0E5336531369E78234AD36 /* Pods-GeographyTweetTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

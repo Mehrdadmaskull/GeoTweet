@@ -7,15 +7,28 @@
 //
 
 import UIKit
+import CoreLocation
+import OAuthSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var locationManager = CLLocationManager()
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        locationManager.requestWhenInUseAuthorization()
+        
+        return true
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        print("Handling url \(url)")
+        if url.scheme == "oauth-swift" {
+            OAuthSwift.handle(url: url)
+        }
         return true
     }
 
