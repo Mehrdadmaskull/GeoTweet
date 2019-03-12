@@ -20,6 +20,8 @@
 		4EA40FB7222D92D900515187 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EA40FB6222D92D900515187 /* MapKit.framework */; };
 		4EA40FB9222DC29300515187 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA40FB8222DC29300515187 /* NetworkManager.swift */; };
 		4EABF482222DFC1A00FB3A8B /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EABF481222DFC1A00FB3A8B /* AppConfig.swift */; };
+		4EFC18252238536A0081180E /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFC1824223853690081180E /* KeychainPasswordItem.swift */; };
+		4EFC1827223854940081180E /* KeychainConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFC1826223854940081180E /* KeychainConfiguration.swift */; };
 		8B0E03D8EAC44131679A77A5 /* Pods_GeographyTweet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8824C222C36141659B65B5CF /* Pods_GeographyTweet.framework */; };
 		A32986F7E29A149AF1D01B68 /* Pods_GeographyTweetTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD8567CB8ED05A69A51F9A6 /* Pods_GeographyTweetTests.framework */; };
 /* End PBXBuildFile section */
@@ -53,6 +55,8 @@
 		4EA40FB6222D92D900515187 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		4EA40FB8222DC29300515187 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		4EABF481222DFC1A00FB3A8B /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
+		4EFC1824223853690081180E /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
+		4EFC1826223854940081180E /* KeychainConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainConfiguration.swift; sourceTree = "<group>"; };
 		6B0E5336531369E78234AD36 /* Pods-GeographyTweetTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GeographyTweetTests.release.xcconfig"; path = "Target Support Files/Pods-GeographyTweetTests/Pods-GeographyTweetTests.release.xcconfig"; sourceTree = "<group>"; };
 		8824C222C36141659B65B5CF /* Pods_GeographyTweet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GeographyTweet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABD6A3829AAA96BD70B0E63D /* Pods-GeographyTweet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GeographyTweet.release.xcconfig"; path = "Target Support Files/Pods-GeographyTweet/Pods-GeographyTweet.release.xcconfig"; sourceTree = "<group>"; };
@@ -116,6 +120,7 @@
 				4EABF481222DFC1A00FB3A8B /* AppConfig.swift */,
 				4E1B8772222E2D3100F94696 /* TwitterOAuthViewController.swift */,
 				4E018AFF22319BCB00789223 /* HelperMethods.swift */,
+				4EFC18282238549A0081180E /* Keychain */,
 			);
 			path = GeographyTweet;
 			sourceTree = "<group>";
@@ -127,6 +132,15 @@
 				4EA40FA9222CDD4000515187 /* Info.plist */,
 			);
 			path = GeographyTweetTests;
+			sourceTree = "<group>";
+		};
+		4EFC18282238549A0081180E /* Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				4EFC1824223853690081180E /* KeychainPasswordItem.swift */,
+				4EFC1826223854940081180E /* KeychainConfiguration.swift */,
+			);
+			path = Keychain;
 			sourceTree = "<group>";
 		};
 		AD4892365478F92166407F42 /* Pods */ = {
@@ -362,7 +376,9 @@
 				4EA40FB3222CDF8600515187 /* Tweet.swift in Sources */,
 				4E018B0022319BCB00789223 /* HelperMethods.swift in Sources */,
 				4EA40FB9222DC29300515187 /* NetworkManager.swift in Sources */,
+				4EFC1827223854940081180E /* KeychainConfiguration.swift in Sources */,
 				4E1B8773222E2D3100F94696 /* TwitterOAuthViewController.swift in Sources */,
+				4EFC18252238536A0081180E /* KeychainPasswordItem.swift in Sources */,
 				4EABF482222DFC1A00FB3A8B /* AppConfig.swift in Sources */,
 				4EA40F95222CDD3D00515187 /* MainViewController.swift in Sources */,
 				4EA40F93222CDD3D00515187 /* AppDelegate.swift in Sources */,

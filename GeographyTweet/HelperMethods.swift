@@ -19,4 +19,25 @@ class HelperMethods {
     static func formatString(toDate: String) -> Date {
         return dateFormatter.date(from: toDate)!
     }
+    
+    static func existingToken(_ type: TokenType) -> Bool {
+        switch type {
+        case .bearer:
+            let bearerToken = UserDefaults.standard.value(forKey: "hasBearerToken") as? Bool
+            if bearerToken == nil || bearerToken! == false {
+                return false
+            }
+        case .oauth:
+            let oauthToken = UserDefaults.standard.value(forKey: "hasOAuthToken") as? Bool
+            if oauthToken == nil || oauthToken! == false {
+                return false
+            }
+        }
+        return true
+    }
+}
+
+enum TokenType {
+    case bearer
+    case oauth
 }

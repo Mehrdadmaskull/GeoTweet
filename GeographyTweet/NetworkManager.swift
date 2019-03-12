@@ -39,6 +39,20 @@ class NetworkManager {
             self.oauthTokenSecret = credential.oauthTokenSecret
             self.userID = params["user_id"] as? String
             self.username = params["screen_name"] as? String
+            
+            do {
+                let oauthItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName, account: "oauthToken")
+                let oauthSecretItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName, account: "oauthTokenSecret")
+                
+                try oauthItem.savePassword(credential.oauthToken)
+                try oauthSecretItem.savePassword(credential.oauthTokenSecret)
+                
+                UserDefaults.standard.set(true, forKey: "hasOAuthToken")
+            }
+            catch {
+                print("Error saving to keychain\n\(error)\n\(error.localizedDescription)")
+            }
+            
             print("Got the access token \(credential.oauthToken)")
             print("Got the access secret \(credential.oauthTokenSecret)")
             
@@ -52,24 +66,42 @@ class NetworkManager {
         let apiBase64 = api.data(using: .utf8)!.base64EncodedString()
         let bearerURL = apiURL.appendingPathComponent("oauth2/token")
         
-        Alamofire.request(bearerURL, method: .post, parameters: ["grant_type": "client_credentials"], encoding: URLEncoding.default, headers: ["Authorization": "Basic \(apiBase64)"]).responseJSON { (response) in
+        let authorization = "Basic ".appending(apiBase64)
+        
+        let headers: HTTPHeaders = ["Authorization": authorization, "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"]
+        let params: Parameters = ["grant_type": "client_credentials"]
+        
+        Alamofire.request(bearerURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: headers).responseJSON { (response) in
 
-            if response.result.isSuccess, let data = response.data {
+            if response.result.isSuccess, response.response?.statusCode == 200, let data = response.data {
                 do {
                     guard let object = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves) as? [String: String] else { return }
                     if object["token_type"] == "bearer" {
                         bearerToken = object["access_token"]
-                        print("Got the bearer token \(bearerToken!)")
+                        
+                        do {
+                            let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName, account: "bearerToken")
+                            try passwordItem.savePassword(bearerToken!)
+                            print("Got the bearer token \(bearerToken!)")
+                            UserDefaults.standard.set(true, forKey: "hasBearerToken")
+                        }
+                        catch {
+                            print("Error saving to keychain\n\(error)\n\(error.localizedDescription)")
+                        }
                     }
                 }
                 catch {
-                    print("Error happened \(error.localizedDescription)")
+                    print("Error happened \(error)\n\(error.localizedDescription)")
                 }
+            }
+            else {
+                print("Response was \(response)")
             }
         }
     }
     
     static func retrieveRecentTweets(latitude: Double, longitude: Double, radius: Int, keyword: String? = nil, maxResults: Int = 10, completion: @escaping (Tweet) -> Void) {
+        checkForExistingToken(.bearer)
         var urlPath = "\(archivePath)?query="
         if let keyword = keyword {
             urlPath.append("\((keyword)) ")
@@ -89,7 +121,7 @@ class NetworkManager {
             }
             let results = try! JSONSerialization.jsonObject(with: data, options: .mutableLeaves) as! [String: AnyObject]
             let result = results["results"] as! [String: AnyObject]
-            let data = JSONSerialization
+//            let data = JSONSerialization
             let jsonDecoder = JSONDecoder()
             var tweet: Tweet
             do {
@@ -99,6 +131,44 @@ class NetworkManager {
             }
             catch {
                 print("Error happened during decoding\n\(error)\(error.localizedDescription)")
+            }
+        }
+    }
+    
+    private static func checkForExistingToken(_ type: TokenType) {
+        switch type {
+        case .bearer:
+            if bearerToken == nil {
+                if !HelperMethods.existingToken(type) {
+                    basicAuthTwitter()
+                }
+                else {
+                    do {
+                        let bearerItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName, account: "bearerToken")
+                        bearerToken = try bearerItem.readPassword()
+                    }
+                    catch {
+                        print("There was an error retrieving bearerToken from Keychain\n\(error)")
+                    }
+                }
+            }
+        case .oauth:
+            if bearerToken == nil {
+                if !HelperMethods.existingToken(type) {
+                    oauthTwitter()
+                }
+                else {
+                    do {
+                        let oauthItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName, account: "oauthToken")
+                        let oauthSecretItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName, account: "oauthTokenSecret")
+                        
+                        oauthToken = try oauthItem.readPassword()
+                        oauthTokenSecret = try oauthSecretItem.readPassword()
+                    }
+                    catch {
+                        print("There was an error retrieving bearerToken from Keychain\n\(error)")
+                    }
+                }
             }
         }
     }

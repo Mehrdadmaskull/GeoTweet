@@ -36,9 +36,10 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
         locationManager.delegate = self
         locationManager.requestLocation()
-        
-        NetworkManager.oauthTwitter()
-        NetworkManager.basicAuthTwitter()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         getTweets()
     }
