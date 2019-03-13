@@ -100,34 +100,37 @@ class NetworkManager {
         }
     }
     
-    static func retrieveRecentTweets(latitude: Double, longitude: Double, radius: Int, keyword: String? = nil, maxResults: Int = 10, completion: @escaping (Tweet) -> Void) {
+    static func retrieveRecentTweets(latitude: Double, longitude: Double, radius: Int, keyword: String? = nil, maxResults: Int = 10, completion: @escaping ([Tweet]) -> Void) {
         checkForExistingToken(.bearer)
-        var urlPath = "\(archivePath)?query="
+//        var urlPath = "\(archivePath)?query="
+//        if let keyword = keyword {
+//            urlPath.append("\((keyword)) ")
+//        }
+//        urlPath.append("point_radius:[\(longitude) \(latitude) \(radius)&maxResults=\(maxResults)")
+
+        var query = ""
         if let keyword = keyword {
-            urlPath.append("\((keyword)) ")
+            query.append("\((keyword)) ")
         }
-        urlPath.append("point_radius:[\(longitude) \(latitude) \(radius)&maxResults=\(maxResults)")
+        query.append("point_radius:[\(longitude) \(latitude) \(radius)mi]")
+        let params: Parameters = ["query": query, "maxResults": maxResults]
         
-        let fullArchiveURL = apiURL.appendingPathComponent(urlPath)
+        let fullArchiveURL = apiURL.appendingPathComponent(archivePath)
         
         guard let bearerToken = bearerToken else { return }
         let header: HTTPHeaders = ["Authorization": "Bearer \(bearerToken)"]
 
-        Alamofire.request(fullArchiveURL, method: .get, parameters: nil, encoding: URLEncoding.default, headers: header).responseJSON { (responseData) in
+        Alamofire.request(fullArchiveURL, method: .get, parameters: params, encoding: URLEncoding.queryString, headers: header).responseJSON { (responseData) in
             
             guard let response = responseData.response, responseData.result.isSuccess, let data = responseData.data else {
                 print("An error happened retrieving tweets\n\(responseData.error)\(responseData.error?.localizedDescription)")
                 return
             }
-            let results = try! JSONSerialization.jsonObject(with: data, options: .mutableLeaves) as! [String: AnyObject]
-            let result = results["results"] as! [String: AnyObject]
-//            let data = JSONSerialization
             let jsonDecoder = JSONDecoder()
-            var tweet: Tweet
+
             do {
-                tweet = try jsonDecoder.decode(Tweet.self, from: data)
-                print("Tweet was successfully received\n\(tweet)")
-                completion(tweet)
+                let tweets = try jsonDecoder.decode(APIResult.self, from: data).results
+                completion(tweets)
             }
             catch {
                 print("Error happened during decoding\n\(error)\(error.localizedDescription)")

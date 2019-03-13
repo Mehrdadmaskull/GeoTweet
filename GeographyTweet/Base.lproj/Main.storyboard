@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.68" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.47"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -38,28 +38,75 @@
                                         <rect key="frame" x="0.0" y="383" width="414" height="435"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="55" id="xSM-T9-N1w" customClass="TweetTableViewCell" customModule="GeographyTweet" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="1" width="414" height="55"/>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TweetCell" id="xSM-T9-N1w" customClass="TweetTableViewCell" customModule="GeographyTweet" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="1" width="414" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xSM-T9-N1w" id="g61-He-wRc">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="54.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100m" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8dK-uq-OVB">
-                                                            <rect key="frame" x="361" y="13.5" width="33" height="27.5"/>
-                                                            <fontDescription key="fontDescription" name="HelveticaNeue-LightItalic" family="Helvetica Neue" pointSize="13"/>
+                                                            <rect key="frame" x="371" y="19.5" width="23" height="22"/>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue-LightItalic" family="Helvetica Neue" pointSize="9"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5zf-kH-Ugv">
+                                                            <rect key="frame" x="328.5" y="24" width="22.5" height="13"/>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue-LightItalic" family="Helvetica Neue" pointSize="11"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="W0m-rq-oVf">
+                                                            <rect key="frame" x="90" y="8" width="58" height="25.5"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bAh-aB-CLE">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="58" height="15.5"/>
+                                                                    <fontDescription key="fontDescription" name="HelveticaNeue-LightItalic" family="Helvetica Neue" pointSize="13"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tweet" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UnJ-Dl-6Y4">
+                                                                    <rect key="frame" x="0.0" y="16.5" width="33" height="9"/>
+                                                                    <fontDescription key="fontDescription" name="HelveticaNeue-LightItalic" family="Helvetica Neue" pointSize="13"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </stackView>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="flH-XJ-W5F">
+                                                            <rect key="frame" x="20" y="8" width="45" height="45"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="flH-XJ-W5F" secondAttribute="height" multiplier="1:1" id="X43-zo-2eC"/>
+                                                                <constraint firstAttribute="height" constant="45" id="yzZ-aM-cHF"/>
+                                                            </constraints>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                    <real key="value" value="22.5"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </imageView>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="8dK-uq-OVB" firstAttribute="centerY" secondItem="g61-He-wRc" secondAttribute="centerY" id="04X-98-sjg"/>
                                                         <constraint firstItem="8dK-uq-OVB" firstAttribute="height" secondItem="g61-He-wRc" secondAttribute="height" multiplier="0.5" id="4dD-s1-NP7"/>
+                                                        <constraint firstAttribute="bottom" secondItem="W0m-rq-oVf" secondAttribute="bottom" constant="10" id="CTS-Fl-ENM"/>
+                                                        <constraint firstItem="flH-XJ-W5F" firstAttribute="top" secondItem="g61-He-wRc" secondAttribute="top" constant="8" id="GGu-j0-FoS"/>
+                                                        <constraint firstItem="W0m-rq-oVf" firstAttribute="leading" secondItem="flH-XJ-W5F" secondAttribute="trailing" constant="25" id="KbK-4F-Pla"/>
+                                                        <constraint firstItem="8dK-uq-OVB" firstAttribute="centerY" secondItem="flH-XJ-W5F" secondAttribute="centerY" id="Kta-Yr-HIP"/>
                                                         <constraint firstAttribute="trailing" secondItem="8dK-uq-OVB" secondAttribute="trailing" constant="20" id="P7u-dX-aMD"/>
+                                                        <constraint firstItem="8dK-uq-OVB" firstAttribute="leading" secondItem="5zf-kH-Ugv" secondAttribute="trailing" constant="20" id="Uzv-wq-Flg"/>
+                                                        <constraint firstItem="W0m-rq-oVf" firstAttribute="top" secondItem="flH-XJ-W5F" secondAttribute="top" id="ddZ-Ay-SwT"/>
+                                                        <constraint firstItem="5zf-kH-Ugv" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="W0m-rq-oVf" secondAttribute="trailing" constant="25" id="kTk-wi-YfU"/>
+                                                        <constraint firstItem="flH-XJ-W5F" firstAttribute="leading" secondItem="g61-He-wRc" secondAttribute="leading" constant="20" id="kVN-RL-Pbw"/>
+                                                        <constraint firstItem="5zf-kH-Ugv" firstAttribute="centerY" secondItem="8dK-uq-OVB" secondAttribute="centerY" id="vyb-wl-tTd"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
-                                                    <outlet property="distance" destination="8dK-uq-OVB" id="4ix-TG-fAS"/>
+                                                    <outlet property="content" destination="UnJ-Dl-6Y4" id="0Y2-eY-VdW"/>
+                                                    <outlet property="date" destination="5zf-kH-Ugv" id="tsL-g2-BpY"/>
+                                                    <outlet property="distance" destination="8dK-uq-OVB" id="6wF-Ut-gNT"/>
+                                                    <outlet property="profilePicture" destination="flH-XJ-W5F" id="vbW-Ff-6yb"/>
+                                                    <outlet property="username" destination="bAh-aB-CLE" id="gbS-BI-sCB"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
@@ -98,6 +145,7 @@
                     </view>
                     <connections>
                         <outlet property="mapView" destination="HGp-hE-tOY" id="VRf-a9-zKo"/>
+                        <outlet property="searchBar" destination="1rE-EP-wmg" id="vgt-dC-TY2"/>
                         <outlet property="tableView" destination="zNz-N0-PFC" id="pM7-5B-B4V"/>
                     </connections>
                 </viewController>

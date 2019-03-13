@@ -33,6 +33,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         
         tableView.tableFooterView = UIView()
+        
+//        tableView.estimatedRowHeight = UIDimension
     
         locationManager.delegate = self
         locationManager.requestLocation()
@@ -56,12 +58,23 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     private func getTweets() {
-        let center = mapView.centerCoordinate
-        
-        NetworkManager.retrieveRecentTweets(latitude: center.latitude, longitude: center.longitude, radius: 10) { tweet in
-            
-            
+        let coordinates: CLLocationCoordinate2D
+        if let location = locationManager.location {
+            coordinates = location.coordinate
         }
+        else {
+            coordinates = mapView.centerCoordinate
+        }
+        NetworkManager.retrieveRecentTweets(latitude: coordinates.latitude, longitude: coordinates.longitude, radius: 10) { tweets in
+            
+            self.tweets = tweets
+            self.tableView.reloadData()
+            self.refreshMapView()
+        }
+    }
+    
+    private func refreshMapView() {
+        mapView.addAnnotations(tweets)
     }
     
     
@@ -75,11 +88,13 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     // MARK: - TableView DataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return tweets.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let tweet = tweets[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetTableViewCell
+        cell.tweet = tweet
         
         return cell
     }

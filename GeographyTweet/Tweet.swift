@@ -8,30 +8,26 @@
 
 import MapKit
 
+struct APIResult: Codable {
+    var results: [Tweet]
+}
+
 struct User: Codable {
-    var id: String
+    var id: Double
     var name: String
     var username: String
-    var profileImg: String
-    
-    var profileImgURL: URL {
-        return URL(string: profileImg)!
-    }
+    var profileImg: URL? = nil
     
     private enum CodingKeys: String, CodingKey {
         case id
         case name
         case username = "screen_name"
-        case profileImg = "profile_banner_url"
+        case profileImg = "profile_image_url_https"
     }
 }
 
 struct BoundingBox: Codable {
-    var coordinates: [[Double]]
-    
-    private enum CodingKeys: String, CodingKey {
-        case coordinates
-    }
+    var coordinates: [[[Double]]]
 }
 
 struct Place: Codable {
@@ -43,8 +39,8 @@ struct Place: Codable {
         var longSum: Double = 0
         var latSum: Double = 0
         for coord in boundingBox.coordinates {
-            longSum += coord.first!
-            latSum += coord.last!
+            longSum += coord.first!.first!
+            latSum += coord.first!.last!
         }
         let avgLat = latSum / Double(boundingBox.coordinates.count)
         let avgLong = longSum / Double(boundingBox.coordinates.count)
@@ -72,12 +68,12 @@ class Tweet: NSObject, Codable, MKAnnotation {
     // MARK: - Variables
     
     var createdAt: String
-    var id: String
+    var id: Double
     var text: String
     var truncated: Bool
     
     var user: User
-    var fullContent: ExtendedTweet
+    var fullContent: ExtendedTweet? = nil
     var place: Place
     
     var date: Date {
@@ -103,11 +99,11 @@ class Tweet: NSObject, Codable, MKAnnotation {
     required init(from decoder: Decoder) throws {
         let tweetValues = try decoder.container(keyedBy: CodingKeys.self)
         createdAt = try tweetValues.decode(String.self, forKey: .createdAt)
-        id = try tweetValues.decode(String.self, forKey: .id)
+        id = try tweetValues.decode(Double.self, forKey: .id)
         text = try tweetValues.decode(String.self, forKey: .text)
         truncated = try tweetValues.decode(Bool.self, forKey: .truncated)
         user = try tweetValues.decode(User.self, forKey: .user)
-        fullContent = try tweetValues.decode(ExtendedTweet.self, forKey: .fullContent)
+        fullContent = try tweetValues.decodeIfPresent(ExtendedTweet.self, forKey: .fullContent)
         place = try tweetValues.decode(Place.self, forKey: .place)
     }
     
