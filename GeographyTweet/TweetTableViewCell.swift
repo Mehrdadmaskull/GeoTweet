@@ -15,8 +15,8 @@ class TweetTableViewCell: UITableViewCell {
     
     var tweet: Tweet! {
         didSet {
-            distance.text = "10mi"
-            username.text = tweet.user.username
+            username.text = "@\(tweet.user.username)"
+            name.text = tweet.user.name
             if let profileImg = tweet.user.profileImg {
                 do {
                     profilePicture.image = try UIImage(data: Data(contentsOf: profileImg))
@@ -26,7 +26,7 @@ class TweetTableViewCell: UITableViewCell {
                     profilePicture.image = UIImage()
                 }
             }
-            date.text = tweet.createdAt
+            date.text = HelperMethods.prettyDateFormat(date: tweet.createdAt)
             content.text = tweet.fullContent?.fullContent ?? tweet.text
         }
     }
@@ -34,6 +34,7 @@ class TweetTableViewCell: UITableViewCell {
     
     @IBOutlet weak var distance: UILabel!
     @IBOutlet weak var username: UILabel!
+    @IBOutlet weak var name: UILabel!
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var content: UILabel!

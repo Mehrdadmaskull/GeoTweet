@@ -95,7 +95,21 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         let tweet = tweets[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetTableViewCell
         cell.tweet = tweet
-        
+        let tweetLocation = tweet.place.location
+        if let distance = locationManager.location?.distance(from: tweetLocation) {
+            let distanceText: String
+            switch distance {
+            case 0..<1000:
+                distanceText = "\(Int(distance))m"
+            default:
+                let dist = distance/1000
+                distanceText = String(format: "%.3f", dist)
+            }
+            cell.distance.text = distanceText
+        }
+        else {
+            cell.distance.text = ""
+        }
         return cell
     }
     
@@ -128,6 +142,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         let radius: CLLocationDistance = 1000
         let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: radius, longitudinalMeters: radius)
         mapView.setRegion(region, animated: true)
+        getTweets()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

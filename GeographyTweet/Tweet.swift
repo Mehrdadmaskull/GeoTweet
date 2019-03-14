@@ -35,6 +35,10 @@ struct Place: Codable {
     var name: String
     var boundingBox: BoundingBox
     
+    var location: CLLocation {
+        return CLLocation(latitude: coordinates.latitude, longitude: coordinates.longitude)
+    }
+    
     var coordinates: (latitude: Double, longitude: Double) {
         var longSum: Double = 0
         var latSum: Double = 0
@@ -67,7 +71,7 @@ class Tweet: NSObject, Codable, MKAnnotation {
     
     // MARK: - Variables
     
-    var createdAt: String
+    var createdAt: Date
     var id: Double
     var text: String
     var truncated: Bool
@@ -75,10 +79,6 @@ class Tweet: NSObject, Codable, MKAnnotation {
     var user: User
     var fullContent: ExtendedTweet? = nil
     var place: Place
-    
-    var date: Date {
-        return HelperMethods.formatString(toDate: createdAt)
-    }
     
     
     // MARK: - Codable
@@ -98,7 +98,7 @@ class Tweet: NSObject, Codable, MKAnnotation {
     
     required init(from decoder: Decoder) throws {
         let tweetValues = try decoder.container(keyedBy: CodingKeys.self)
-        createdAt = try tweetValues.decode(String.self, forKey: .createdAt)
+        createdAt = try tweetValues.decode(Date.self, forKey: .createdAt)
         id = try tweetValues.decode(Double.self, forKey: .id)
         text = try tweetValues.decode(String.self, forKey: .text)
         truncated = try tweetValues.decode(Bool.self, forKey: .truncated)

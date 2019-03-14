@@ -10,14 +10,38 @@ import Foundation
 
 class HelperMethods {
     
-    static var dateFormatter: DateFormatter {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = ""
-        return dateFormatter
+    public enum DateFormatterType {
+        case toString, toDate
     }
     
-    static func formatString(toDate: String) -> Date {
-        return dateFormatter.date(from: toDate)!
+    static func dateFormat(type: DateFormatterType) -> DateFormatter {
+        let df = dateFormatter
+        switch type {
+        case .toDate:
+            df.dateFormat = "E MMM dd HH:mm:ss Z yyyy"
+        case .toString:
+            df.dateFormat = "yyyy-MM-dd"
+        }
+        return df
+    }
+    
+    static func prettyDateFormat(date: Date) -> String {
+        let now = Date()
+        let duration = DateInterval(start: date, end: now).duration
+        switch duration {
+        case 0..<60*60:
+            return "\(Int(duration)/60)m"
+        case 60*60..<60*60*24:
+            return "\(Int(duration)/3600)h"
+        default:
+            let df = dateFormat(type: .toString)
+            return df.string(from: date)
+        }
+    }
+    
+    static var dateFormatter: DateFormatter {
+        let dateFormatter = DateFormatter()
+        return dateFormatter
     }
     
     static func existingToken(_ type: TokenType) -> Bool {

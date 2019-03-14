@@ -127,7 +127,7 @@ class NetworkManager {
                 return
             }
             let jsonDecoder = JSONDecoder()
-
+            jsonDecoder.dateDecodingStrategy = .formatted(HelperMethods.dateFormat(type: .toDate))
             do {
                 let tweets = try jsonDecoder.decode(APIResult.self, from: data).results
                 completion(tweets)
