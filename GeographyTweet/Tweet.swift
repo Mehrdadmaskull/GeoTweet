@@ -67,6 +67,10 @@ struct ExtendedTweet: Codable {
     }
 }
 
+struct Geo: Codable {
+    var coordinates: [Double]
+}
+
 class Tweet: NSObject, Codable, MKAnnotation {
     
     // MARK: - Variables
@@ -79,6 +83,7 @@ class Tweet: NSObject, Codable, MKAnnotation {
     var user: User
     var fullContent: ExtendedTweet? = nil
     var place: Place
+    var geo: Geo?
     
     
     // MARK: - Codable
@@ -91,6 +96,7 @@ class Tweet: NSObject, Codable, MKAnnotation {
         case place
         case user
         case fullContent = "extended_tweet"
+        case geo
     }
     
     
@@ -105,6 +111,7 @@ class Tweet: NSObject, Codable, MKAnnotation {
         user = try tweetValues.decode(User.self, forKey: .user)
         fullContent = try tweetValues.decodeIfPresent(ExtendedTweet.self, forKey: .fullContent)
         place = try tweetValues.decode(Place.self, forKey: .place)
+        geo = try tweetValues.decodeIfPresent(Geo.self, forKey: .geo)
     }
     
     
@@ -112,7 +119,13 @@ class Tweet: NSObject, Codable, MKAnnotation {
     
     var coordinate: CLLocationCoordinate2D {
         get {
-            let coord = CLLocationCoordinate2D(latitude: place.coordinates.latitude, longitude: place.coordinates.longitude)
+            let coord: CLLocationCoordinate2D
+            if let geo = geo {
+                coord = CLLocationCoordinate2D(latitude: geo.coordinates.first!, longitude: geo.coordinates.last!)
+            }
+            else {
+                coord = CLLocationCoordinate2D(latitude: place.coordinates.latitude, longitude: place.coordinates.longitude)
+            }
             return coord
         }
     }

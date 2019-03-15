@@ -59,6 +59,31 @@ class HelperMethods {
         }
         return true
     }
+    
+    static func persistData(_ data: Data) {
+//        let jsonEncoder = JSONEncoder()
+//        do {
+//            let encodedData = try jsonEncoder.encode(data)
+            UserDefaults.standard.set(data, forKey: "TweetsData")
+//        }
+//        catch {
+//            print("Couldn't persist tweets data\n\(error)")
+//        }
+    }
+    
+    static func retrievePersistedTweets() -> [Tweet]? {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .formatted(dateFormat(type: .toDate))
+        var tweets: [Tweet]? = nil
+        guard let tweetsData = UserDefaults.standard.value(forKey: "TweetsData") as? Data else { return tweets }
+        do {
+            tweets = try decoder.decode(APIResult.self, from: tweetsData).results
+        }
+        catch {
+            print("Couldn't retrieve persisted tweets \n\(error)")
+        }
+        return tweets
+    }
 }
 
 enum TokenType {

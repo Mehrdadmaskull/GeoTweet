@@ -16,6 +16,7 @@ class NetworkManager {
     
     private static let apiURL = URL(string: "https://api.twitter.com/")!
     private static let archivePath = "1.1/tweets/search/fullarchive/Dev.json"
+    private static let lastMonthPath = "1.1/tweets/search/30day/Dev.json"
     //?query=point_radius:[-73.578593 45.496896 20mi]&maxResults=10"
     
     private static var oauth: OAuth1Swift!
@@ -115,7 +116,8 @@ class NetworkManager {
         query.append("point_radius:[\(longitude) \(latitude) \(radius)mi]")
         let params: Parameters = ["query": query, "maxResults": maxResults]
         
-        let fullArchiveURL = apiURL.appendingPathComponent(archivePath)
+//        let fullArchiveURL = apiURL.appendingPathComponent(archivePath)
+        let fullArchiveURL = apiURL.appendingPathComponent(lastMonthPath)
         
         guard let bearerToken = bearerToken else { return }
         let header: HTTPHeaders = ["Authorization": "Bearer \(bearerToken)"]
@@ -126,10 +128,13 @@ class NetworkManager {
                 print("An error happened retrieving tweets\n\(responseData.error)\(responseData.error?.localizedDescription)")
                 return
             }
+            HelperMethods.persistData(data)
             let jsonDecoder = JSONDecoder()
             jsonDecoder.dateDecodingStrategy = .formatted(HelperMethods.dateFormat(type: .toDate))
             do {
                 let tweets = try jsonDecoder.decode(APIResult.self, from: data).results
+                
+//                HelperMethods.persistDataAsTweets(data)
                 completion(tweets)
             }
             catch {
@@ -156,7 +161,7 @@ class NetworkManager {
                 }
             }
         case .oauth:
-            if bearerToken == nil {
+            if oauthToken == nil || oauthTokenSecret == nil {
                 if !HelperMethods.existingToken(type) {
                     oauthTwitter()
                 }

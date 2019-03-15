@@ -34,16 +34,16 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         tableView.tableFooterView = UIView()
         
-//        tableView.estimatedRowHeight = UIDimension
-    
-        locationManager.delegate = self
-        locationManager.requestLocation()
+//        locationManager.delegate = self
+//        locationManager.requestLocation()
+        setDefaultLocation()
+        getTweets()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        getTweets()
+        
     }
 
     
@@ -52,19 +52,26 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     private func setDefaultLocation() {
         let radius: CLLocationDistance = 1000
-        let location = CLLocation(latitude: 45.500439, longitude: -73.568839)
+        let location = CLLocation(latitude: 45.500439, longitude: -73.568839) //lat: 45.500439 long:-73.568839
         let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: radius, longitudinalMeters: radius)
         mapView.setRegion(region, animated: true)
     }
     
     private func getTweets() {
+        if let savedTweets = HelperMethods.retrievePersistedTweets() {
+            tweets = savedTweets
+            tableView.reloadData()
+            refreshMapView()
+            return
+        }
+        
         let coordinates: CLLocationCoordinate2D
-        if let location = locationManager.location {
-            coordinates = location.coordinate
-        }
-        else {
+//        if let location = locationManager.location {
+//            coordinates = location.coordinate
+//        }
+//        else {
             coordinates = mapView.centerCoordinate
-        }
+//        }
         NetworkManager.retrieveRecentTweets(latitude: coordinates.latitude, longitude: coordinates.longitude, radius: 10) { tweets in
             
             self.tweets = tweets
@@ -103,7 +110,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 distanceText = "\(Int(distance))m"
             default:
                 let dist = distance/1000
-                distanceText = String(format: "%.3f", dist)
+                distanceText = String(format: "%.3fkm", dist)
             }
             cell.distance.text = distanceText
         }
@@ -142,7 +149,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         let radius: CLLocationDistance = 1000
         let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: radius, longitudinalMeters: radius)
         mapView.setRegion(region, animated: true)
-        getTweets()
+//        getTweets()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
