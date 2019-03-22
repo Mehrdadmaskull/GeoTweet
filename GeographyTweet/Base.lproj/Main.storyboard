@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.68" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.68" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GVT-zx-pAc">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,6 +10,135 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Onboarding View Controller-->
+        <scene sceneID="XCB-qL-DTQ">
+            <objects>
+                <viewController storyboardIdentifier="Onboarding View Controller" id="GVT-zx-pAc" customClass="OnboardingViewController" customModule="GeographyTweet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Jfw-Xf-P5f">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YR2-2P-2dN">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Awg-DS-Dvi">
+                                        <rect key="frame" x="0.0" y="0.0" width="1242" height="818"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ApM-nn-aQb" userLabel="First Onboarding View">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to GeographyTweet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d6f-cZ-zFJ">
+                                                        <rect key="frame" x="25.5" y="50" width="363" height="31"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="26"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can use the map to see tweets around you!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ol-jx-2Xb">
+                                                        <rect key="frame" x="103.5" y="388" width="207" height="42"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="d6f-cZ-zFJ" firstAttribute="centerX" secondItem="ApM-nn-aQb" secondAttribute="centerX" id="5tC-1Q-0hv"/>
+                                                    <constraint firstItem="3Ol-jx-2Xb" firstAttribute="width" secondItem="ApM-nn-aQb" secondAttribute="width" multiplier="0.5" id="6H0-Bc-KaD"/>
+                                                    <constraint firstItem="d6f-cZ-zFJ" firstAttribute="top" secondItem="ApM-nn-aQb" secondAttribute="top" constant="50" id="Mn2-Co-YW8"/>
+                                                    <constraint firstItem="3Ol-jx-2Xb" firstAttribute="centerX" secondItem="ApM-nn-aQb" secondAttribute="centerX" id="c0v-rv-T52"/>
+                                                    <constraint firstItem="3Ol-jx-2Xb" firstAttribute="centerY" secondItem="ApM-nn-aQb" secondAttribute="centerY" id="ntf-Rf-zTE"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Raw-5d-urG" userLabel="Second Onboarding View">
+                                                <rect key="frame" x="414" y="0.0" width="414" height="818"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Or search for tweets!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9al-jf-3cD">
+                                                        <rect key="frame" x="123" y="398.5" width="168" height="21"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="9al-jf-3cD" firstAttribute="centerY" secondItem="rB7-SM-eHe" secondAttribute="centerY" id="KcM-BD-znl"/>
+                                                    <constraint firstItem="9al-jf-3cD" firstAttribute="centerX" secondItem="rB7-SM-eHe" secondAttribute="centerX" id="dg4-aT-drg"/>
+                                                </constraints>
+                                                <viewLayoutGuide key="safeArea" id="rB7-SM-eHe"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iSL-r1-Rfb" userLabel="Third Onboarding View">
+                                                <rect key="frame" x="828" y="0.0" width="414" height="818"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Are you ready to use the app?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WBu-JY-8Ua">
+                                                        <rect key="frame" x="103.5" y="388" width="207" height="42"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="WBu-JY-8Ua" firstAttribute="centerY" secondItem="Bh0-Bd-6TZ" secondAttribute="centerY" id="BWz-5l-aRS"/>
+                                                    <constraint firstItem="WBu-JY-8Ua" firstAttribute="width" secondItem="iSL-r1-Rfb" secondAttribute="width" multiplier="0.5" id="WkC-5J-OAT"/>
+                                                    <constraint firstItem="WBu-JY-8Ua" firstAttribute="centerX" secondItem="Bh0-Bd-6TZ" secondAttribute="centerX" id="ljn-En-Nre"/>
+                                                </constraints>
+                                                <viewLayoutGuide key="safeArea" id="Bh0-Bd-6TZ"/>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Awg-DS-Dvi" secondAttribute="trailing" id="Myi-hX-2sN"/>
+                                    <constraint firstItem="Awg-DS-Dvi" firstAttribute="top" secondItem="YR2-2P-2dN" secondAttribute="top" id="Z5h-Pk-R5j"/>
+                                    <constraint firstAttribute="bottom" secondItem="Awg-DS-Dvi" secondAttribute="bottom" id="d22-h7-Ayr"/>
+                                    <constraint firstItem="Awg-DS-Dvi" firstAttribute="height" secondItem="YR2-2P-2dN" secondAttribute="height" id="d8a-YD-CSP"/>
+                                    <constraint firstItem="Awg-DS-Dvi" firstAttribute="leading" secondItem="YR2-2P-2dN" secondAttribute="leading" id="gXg-hU-rTQ"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="GVT-zx-pAc" id="wrV-gv-ed6"/>
+                                </connections>
+                            </scrollView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="ZfB-cK-Kdk">
+                                <rect key="frame" x="187.5" y="798.5" width="39" height="37"/>
+                                <color key="pageIndicatorTintColor" red="0.21135418141625573" green="0.40624525425466784" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="currentPageIndicatorTintColor" cocoaTouchSystemColor="darkTextColor"/>
+                            </pageControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RdZ-kP-J0d">
+                                <rect key="frame" x="294" y="792" width="70" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="Des-8c-bWh"/>
+                                    <constraint firstAttribute="height" constant="50" id="Ueh-cj-Ogf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                <state key="normal" title="SKIP"/>
+                                <connections>
+                                    <action selector="skipOnboarding:" destination="GVT-zx-pAc" eventType="touchUpInside" id="dXi-zz-PV9"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ZfB-cK-Kdk" firstAttribute="centerY" secondItem="RdZ-kP-J0d" secondAttribute="centerY" id="1Ve-wv-0XO"/>
+                            <constraint firstItem="ApM-nn-aQb" firstAttribute="width" secondItem="Jfw-Xf-P5f" secondAttribute="width" id="BuK-Vb-7VR"/>
+                            <constraint firstItem="YR2-2P-2dN" firstAttribute="leading" secondItem="aom-Se-IoH" secondAttribute="leading" id="MWc-fM-VRJ"/>
+                            <constraint firstItem="aom-Se-IoH" firstAttribute="trailing" secondItem="YR2-2P-2dN" secondAttribute="trailing" id="d8e-lq-et6"/>
+                            <constraint firstItem="ZfB-cK-Kdk" firstAttribute="centerX" secondItem="aom-Se-IoH" secondAttribute="centerX" id="gkb-La-TaH"/>
+                            <constraint firstItem="aom-Se-IoH" firstAttribute="trailing" secondItem="RdZ-kP-J0d" secondAttribute="trailing" constant="50" id="kZI-r9-4Q2"/>
+                            <constraint firstItem="YR2-2P-2dN" firstAttribute="top" secondItem="aom-Se-IoH" secondAttribute="top" id="p1S-Bd-uUb"/>
+                            <constraint firstItem="aom-Se-IoH" firstAttribute="bottom" secondItem="RdZ-kP-J0d" secondAttribute="bottom" constant="20" id="snr-gM-4H5"/>
+                            <constraint firstItem="aom-Se-IoH" firstAttribute="bottom" secondItem="YR2-2P-2dN" secondAttribute="bottom" id="wZd-VI-TLe"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="aom-Se-IoH"/>
+                    </view>
+                    <connections>
+                        <outlet property="pageControl" destination="ZfB-cK-Kdk" id="iGt-tX-aRl"/>
+                        <segue destination="BYZ-38-t0r" kind="showDetail" identifier="MainSegue" id="JEX-gx-9tN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ApD-sE-SeT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1042" y="73"/>
+        </scene>
         <!--Empty Data Set Delegate-->
         <scene sceneID="tne-QT-ifu">
             <objects>

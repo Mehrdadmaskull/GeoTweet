@@ -35,7 +35,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.tableFooterView = UIView()
         
 //        locationManager.delegate = self
-//        locationManager.requestLocation()
+        locationManager.requestWhenInUseAuthorization()
         setDefaultLocation()
         getTweets()
     }

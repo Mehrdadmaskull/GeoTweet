@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4E018B0022319BCB00789223 /* HelperMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E018AFF22319BCB00789223 /* HelperMethods.swift */; };
 		4E1B8773222E2D3100F94696 /* TwitterOAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1B8772222E2D3100F94696 /* TwitterOAuthViewController.swift */; };
+		4E317EDB224403250005A0A0 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E317EDA224403250005A0A0 /* OnboardingViewController.swift */; };
 		4EA40F93222CDD3D00515187 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA40F92222CDD3D00515187 /* AppDelegate.swift */; };
 		4EA40F95222CDD3D00515187 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA40F94222CDD3D00515187 /* MainViewController.swift */; };
 		4EA40F98222CDD3D00515187 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EA40F96222CDD3D00515187 /* Main.storyboard */; };
@@ -40,6 +41,7 @@
 		3DD8567CB8ED05A69A51F9A6 /* Pods_GeographyTweetTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GeographyTweetTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E018AFF22319BCB00789223 /* HelperMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperMethods.swift; sourceTree = "<group>"; };
 		4E1B8772222E2D3100F94696 /* TwitterOAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitterOAuthViewController.swift; sourceTree = "<group>"; };
+		4E317EDA224403250005A0A0 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		4EA40F8F222CDD3D00515187 /* GeographyTweet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeographyTweet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EA40F92222CDD3D00515187 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4EA40F94222CDD3D00515187 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				4E1B8772222E2D3100F94696 /* TwitterOAuthViewController.swift */,
 				4E018AFF22319BCB00789223 /* HelperMethods.swift */,
 				4EFC18282238549A0081180E /* Keychain */,
+				4E317EDA224403250005A0A0 /* OnboardingViewController.swift */,
 			);
 			path = GeographyTweet;
 			sourceTree = "<group>";
@@ -381,6 +384,7 @@
 				4EFC18252238536A0081180E /* KeychainPasswordItem.swift in Sources */,
 				4EABF482222DFC1A00FB3A8B /* AppConfig.swift in Sources */,
 				4EA40F95222CDD3D00515187 /* MainViewController.swift in Sources */,
+				4E317EDB224403250005A0A0 /* OnboardingViewController.swift in Sources */,
 				4EA40F93222CDD3D00515187 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

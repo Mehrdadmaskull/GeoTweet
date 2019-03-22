@@ -30,7 +30,7 @@ class NetworkManager {
     
     // MARK: - Methods
 
-    static func oauthTwitter() {
+    static func oauthTwitter(completionHandler: @escaping (Bool) -> Void) {
         oauth = OAuth1Swift(consumerKey: AppConfig.consumerKey, consumerSecret: AppConfig.secretKey, requestTokenUrl: AppConfig.tokenURL, authorizeUrl: AppConfig.authorizeURL, accessTokenUrl: AppConfig.accessTokenURL)
         
         oauth.authorizeURLHandler = TwitterOAuthViewController()
@@ -49,9 +49,12 @@ class NetworkManager {
                 try oauthSecretItem.savePassword(credential.oauthTokenSecret)
                 
                 UserDefaults.standard.set(true, forKey: "hasOAuthToken")
+                
+                completionHandler(true)
             }
             catch {
                 print("Error saving to keychain\n\(error)\n\(error.localizedDescription)")
+                completionHandler(false)
             }
             
             print("Got the access token \(credential.oauthToken)")
@@ -59,10 +62,11 @@ class NetworkManager {
             
         }) { (error) in
             print("Error happened in OAuth \(error)\n\(error.localizedDescription)")
+            completionHandler(false)
         }
     }
     
-    static func basicAuthTwitter() {
+    static func basicAuthTwitter(completionHandler: @escaping (Bool) -> Void) {
         let api = "\(AppConfig.consumerKey):\(AppConfig.secretKey)"
         let apiBase64 = api.data(using: .utf8)!.base64EncodedString()
         let bearerURL = apiURL.appendingPathComponent("oauth2/token")
@@ -85,85 +89,103 @@ class NetworkManager {
                             try passwordItem.savePassword(bearerToken!)
                             print("Got the bearer token \(bearerToken!)")
                             UserDefaults.standard.set(true, forKey: "hasBearerToken")
+                            
+                            completionHandler(true)
                         }
                         catch {
                             print("Error saving to keychain\n\(error)\n\(error.localizedDescription)")
+                            completionHandler(false)
                         }
                     }
                 }
                 catch {
                     print("Error happened \(error)\n\(error.localizedDescription)")
+                    completionHandler(false)
                 }
             }
             else {
                 print("Response was \(response)")
+                completionHandler(false)
             }
         }
     }
     
     static func retrieveRecentTweets(latitude: Double, longitude: Double, radius: Int, keyword: String? = nil, maxResults: Int = 10, completion: @escaping ([Tweet]) -> Void) {
-        checkForExistingToken(.bearer)
-//        var urlPath = "\(archivePath)?query="
-//        if let keyword = keyword {
-//            urlPath.append("\((keyword)) ")
-//        }
-//        urlPath.append("point_radius:[\(longitude) \(latitude) \(radius)&maxResults=\(maxResults)")
-
-        var query = ""
-        if let keyword = keyword {
-            query.append("\((keyword)) ")
-        }
-        query.append("point_radius:[\(longitude) \(latitude) \(radius)mi]")
-        let params: Parameters = ["query": query, "maxResults": maxResults]
         
-//        let fullArchiveURL = apiURL.appendingPathComponent(archivePath)
-        let fullArchiveURL = apiURL.appendingPathComponent(lastMonthPath)
-        
-        guard let bearerToken = bearerToken else { return }
-        let header: HTTPHeaders = ["Authorization": "Bearer \(bearerToken)"]
-
-        Alamofire.request(fullArchiveURL, method: .get, parameters: params, encoding: URLEncoding.queryString, headers: header).responseJSON { (responseData) in
-            
-            guard let response = responseData.response, responseData.result.isSuccess, let data = responseData.data else {
-                print("An error happened retrieving tweets\n\(responseData.error)\(responseData.error?.localizedDescription)")
-                return
-            }
-            HelperMethods.persistData(data)
-            let jsonDecoder = JSONDecoder()
-            jsonDecoder.dateDecodingStrategy = .formatted(HelperMethods.dateFormat(type: .toDate))
-            do {
-                let tweets = try jsonDecoder.decode(APIResult.self, from: data).results
+        checkForExistingToken(.bearer) { success in
+            if success {
+//                var urlPath = "\(archivePath)?query="
+//                if let keyword = keyword {
+//                    urlPath.append("\((keyword)) ")
+//                }
+//                urlPath.append("point_radius:[\(longitude) \(latitude) \(radius)&maxResults=\(maxResults)")
+                var query = ""
+                if let keyword = keyword {
+                    query.append("\((keyword)) ")
+                }
+                query.append("point_radius:[\(longitude) \(latitude) \(radius)mi]")
+                let params: Parameters = ["query": query, "maxResults": maxResults]
                 
-//                HelperMethods.persistDataAsTweets(data)
-                completion(tweets)
+                //        let fullArchiveURL = apiURL.appendingPathComponent(archivePath)
+                let fullArchiveURL = apiURL.appendingPathComponent(lastMonthPath)
+                
+                guard let bearerToken = bearerToken else { return }
+                let header: HTTPHeaders = ["Authorization": "Bearer \(bearerToken)"]
+                
+                Alamofire.request(fullArchiveURL, method: .get, parameters: params, encoding: URLEncoding.queryString, headers: header).responseJSON { (responseData) in
+                    
+                    guard let response = responseData.response, responseData.result.isSuccess, let data = responseData.data else {
+                        print("An error happened retrieving tweets\n\(responseData.error)\(responseData.error?.localizedDescription)")
+                        return
+                    }
+                    HelperMethods.persistData(data)
+                    let jsonDecoder = JSONDecoder()
+                    jsonDecoder.dateDecodingStrategy = .formatted(HelperMethods.dateFormat(type: .toDate))
+                    do {
+                        let tweets = try jsonDecoder.decode(APIResult.self, from: data).results
+                        
+                        //                HelperMethods.persistDataAsTweets(data)
+                        completion(tweets)
+                    }
+                    catch {
+                        print("Error happened during decoding\n\(error)\(error.localizedDescription)")
+                        completion([])
+                    }
+                }
             }
-            catch {
-                print("Error happened during decoding\n\(error)\(error.localizedDescription)")
+            else {
+                completion([])
             }
         }
     }
     
-    private static func checkForExistingToken(_ type: TokenType) {
+    private static func checkForExistingToken(_ type: TokenType, completion: @escaping (Bool) -> Void) {
         switch type {
         case .bearer:
             if bearerToken == nil {
                 if !HelperMethods.existingToken(type) {
-                    basicAuthTwitter()
+                    basicAuthTwitter { success in
+                        completion(success)
+                    }
                 }
                 else {
                     do {
                         let bearerItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName, account: "bearerToken")
                         bearerToken = try bearerItem.readPassword()
+                        completion(true)
                     }
                     catch {
                         print("There was an error retrieving bearerToken from Keychain\n\(error)")
+                        completion(false)
                     }
                 }
             }
         case .oauth:
             if oauthToken == nil || oauthTokenSecret == nil {
                 if !HelperMethods.existingToken(type) {
-                    oauthTwitter()
+                    oauthTwitter { success in
+                        completion(success)
+                    }
                 }
                 else {
                     do {
@@ -172,9 +194,11 @@ class NetworkManager {
                         
                         oauthToken = try oauthItem.readPassword()
                         oauthTokenSecret = try oauthSecretItem.readPassword()
+                        completion(true)
                     }
                     catch {
                         print("There was an error retrieving bearerToken from Keychain\n\(error)")
+                        completion(false)
                     }
                 }
             }
