@@ -57,7 +57,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         mapView.setRegion(region, animated: true)
     }
     
-    private func getTweets() {
+    private func getTweets(keyword: String? = nil) {
         if let savedTweets = HelperMethods.retrievePersistedTweets() {
             tweets = savedTweets
             tableView.reloadData()
@@ -66,13 +66,13 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         
         let coordinates: CLLocationCoordinate2D
-//        if let location = locationManager.location {
-//            coordinates = location.coordinate
-//        }
-//        else {
+        if let location = locationManager.location {
+            coordinates = location.coordinate
+        }
+        else {
             coordinates = mapView.centerCoordinate
-//        }
-        NetworkManager.retrieveRecentTweets(latitude: coordinates.latitude, longitude: coordinates.longitude, radius: 10) { tweets in
+        }
+        NetworkManager.retrieveRecentTweets(latitude: coordinates.latitude, longitude: coordinates.longitude, radius: 10, keyword: keyword, maxResults: 10) { tweets in
             
             self.tweets = tweets
             self.tableView.reloadData()
@@ -130,17 +130,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     // MARK: - CoreLocationManager Delegate
     
-//    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-//        switch status {
-//        case .authorizedWhenInUse:
-//            locationManager.requestLocation()
-//        default:
-//            let alert = UIAlertController(title: "Alert", message: "Location Access Not Permitted", preferredStyle: .alert)
-//            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-//            present(alert, animated: true, completion: nil)
-//        }
-//    }
-    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.first else {
             setDefaultLocation()
@@ -149,7 +138,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         let radius: CLLocationDistance = 1000
         let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: radius, longitudinalMeters: radius)
         mapView.setRegion(region, animated: true)
-//        getTweets()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -197,12 +185,15 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     // MARK: - UISearchBar Delegate
     
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        if let keyword = searchBar.text {
+            getTweets(keyword: keyword)
+        }
     }
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
     }
 }
 

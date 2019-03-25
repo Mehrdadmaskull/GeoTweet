@@ -30,20 +30,50 @@ class OnboardingViewController: UIViewController, UIScrollViewDelegate {
         let alertController = UIAlertController(title: "Error", message: "Couldn't authenticate you. Please try again!", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         
-        if !HelperMethods.existingToken(.oauth) {
-            NetworkManager.oauthTwitter() { success in
-                if success {
-                    NetworkManager.basicAuthTwitter(completionHandler: { _ in
-                        self.performSegue(withIdentifier: "MainSegue", sender: nil)
-                    })
-                }
-                else {
-                    self.present(alertController, animated: true, completion: nil)
-                }
-            }
+        let bearer = HelperMethods.existingToken(.bearer).bit
+        let oauth = HelperMethods.existingToken(.oauth).bit
+        
+        if bearer.rawValue | oauth.rawValue == TokenBit.success.rawValue {
+            performSegue(withIdentifier: "MainSegue", sender: nil)
         }
         else {
-            self.performSegue(withIdentifier: "MainSegue", sender: nil)
+            if bearer.rawValue | oauth.rawValue == TokenBit.failure.rawValue {
+                NetworkManager.basicAuthTwitter { [weak self] success in
+                    if success {
+                        NetworkManager.oauthTwitter(completionHandler: { [weak self] success in
+                            if success {
+                                self?.performSegue(withIdentifier: "MainSegue", sender: nil)
+                            }
+                            else {
+                                self?.present(alertController, animated: true, completion: nil)
+                            }
+                        })
+                    }
+                    else {
+                        self?.present(alertController, animated: true, completion: nil)
+                    }
+                }
+            }
+            else if oauth.rawValue == TokenBit.failure.rawValue {
+                NetworkManager.oauthTwitter { [weak self] success in
+                    if success {
+                        self?.performSegue(withIdentifier: "MainSegue", sender: nil)
+                    }
+                    else {
+                        self?.present(alertController, animated: true, completion: nil)
+                    }
+                }
+            }
+            else if bearer.rawValue == TokenBit.failure.rawValue {
+                NetworkManager.basicAuthTwitter { [weak self] success in
+                    if success {
+                        self?.performSegue(withIdentifier: "MainSegue", sender: nil)
+                    }
+                    else {
+                        self?.present(alertController, animated: true, completion: nil)
+                    }
+                }
+            }
         }
     }
     

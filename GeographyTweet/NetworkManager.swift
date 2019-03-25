@@ -138,7 +138,7 @@ class NetworkManager {
                         print("An error happened retrieving tweets\n\(responseData.error)\(responseData.error?.localizedDescription)")
                         return
                     }
-                    HelperMethods.persistData(data)
+                    HelperMethods.persistTweets(data)
                     let jsonDecoder = JSONDecoder()
                     jsonDecoder.dateDecodingStrategy = .formatted(HelperMethods.dateFormat(type: .toDate))
                     do {
@@ -163,7 +163,7 @@ class NetworkManager {
         switch type {
         case .bearer:
             if bearerToken == nil {
-                if !HelperMethods.existingToken(type) {
+                if !HelperMethods.existingToken(type).value {
                     basicAuthTwitter { success in
                         completion(success)
                     }
@@ -182,7 +182,7 @@ class NetworkManager {
             }
         case .oauth:
             if oauthToken == nil || oauthTokenSecret == nil {
-                if !HelperMethods.existingToken(type) {
+                if !HelperMethods.existingToken(type).value {
                     oauthTwitter { success in
                         completion(success)
                     }

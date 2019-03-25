@@ -9,6 +9,7 @@ target 'GeographyTweet' do
   pod 'Alamofire'
   pod 'DZNEmptyDataSet'
   pod 'OAuthSwift'
+  pod 'AlamofireImage'
 
   target 'GeographyTweetTests' do
     inherit! :search_paths

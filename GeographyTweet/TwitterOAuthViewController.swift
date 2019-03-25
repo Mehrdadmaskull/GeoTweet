@@ -49,8 +49,7 @@ class TwitterOAuthViewController: OAuthWebViewController, UIWebViewDelegate {
     
     func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebView.NavigationType) -> Bool {
         if let url = request.url, url.scheme == "oauth-swift" {
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "getRepositories"), object: nil, userInfo: nil)
-            
+            UserDefaults.standard.setValue(true, forKey: "LoggedIn")
             dismissWebViewController()
         }
         return true

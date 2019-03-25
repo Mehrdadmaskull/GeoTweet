@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AlamofireImage
 
 class TweetTableViewCell: UITableViewCell {
     
@@ -18,13 +19,7 @@ class TweetTableViewCell: UITableViewCell {
             username.text = "@\(tweet.user.username)"
             name.text = tweet.user.name
             if let profileImg = tweet.user.profileImg {
-                do {
-                    profilePicture.image = try UIImage(data: Data(contentsOf: profileImg))
-                }
-                catch {
-                    // TODO: Replace with a placeholder image
-                    profilePicture.image = UIImage()
-                }
+                profilePicture.af_setImage(withURL: profileImg, placeholderImage: nil, filter: nil, progress: nil, progressQueue: .global(qos: .background), imageTransition: .crossDissolve(0.3), runImageTransitionIfCached: false, completion: nil)
             }
             date.text = HelperMethods.prettyDateFormat(date: tweet.createdAt)
             content.text = tweet.fullContent?.fullContent ?? tweet.text
@@ -39,6 +34,4 @@ class TweetTableViewCell: UITableViewCell {
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var content: UILabel!
 //    @IBOutlet weak var media: UILabel!
-//    @IBOutlet weak var tweet: UILabel!
-//    @IBOutlet weak var tweet: UILabel!
 }

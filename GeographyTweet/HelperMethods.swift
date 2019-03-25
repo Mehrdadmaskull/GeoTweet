@@ -44,31 +44,25 @@ class HelperMethods {
         return dateFormatter
     }
     
-    static func existingToken(_ type: TokenType) -> Bool {
+    static func existingToken(_ type: TokenType) -> (bit: TokenBit, value: Bool) {
         switch type {
         case .bearer:
             let bearerToken = UserDefaults.standard.value(forKey: "hasBearerToken") as? Bool
             if bearerToken == nil || bearerToken! == false {
-                return false
+                return (bit: .failure, value: false)
             }
+            return (bit: .bearer, value: true)
         case .oauth:
             let oauthToken = UserDefaults.standard.value(forKey: "hasOAuthToken") as? Bool
             if oauthToken == nil || oauthToken! == false {
-                return false
+                return (bit: .failure, value: false)
             }
+            return (bit: .oauth, value: true)
         }
-        return true
     }
     
-    static func persistData(_ data: Data) {
-//        let jsonEncoder = JSONEncoder()
-//        do {
-//            let encodedData = try jsonEncoder.encode(data)
+    static func persistTweets(_ data: Data) {
             UserDefaults.standard.set(data, forKey: "TweetsData")
-//        }
-//        catch {
-//            print("Couldn't persist tweets data\n\(error)")
-//        }
     }
     
     static func retrievePersistedTweets() -> [Tweet]? {
@@ -89,4 +83,13 @@ class HelperMethods {
 enum TokenType {
     case bearer
     case oauth
+}
+
+struct TokenBit: OptionSet {
+    let rawValue: UInt8
+    
+    static let bearer = TokenBit(rawValue: 01 << 0)
+    static let oauth = TokenBit(rawValue: 10 << 0)
+    static let success = TokenBit(rawValue: 11 << 0)
+    static let failure = TokenBit(rawValue: 00 << 0)
 }

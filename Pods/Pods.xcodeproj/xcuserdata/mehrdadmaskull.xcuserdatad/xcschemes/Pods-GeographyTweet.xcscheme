@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A095CFF7F6613374D1EE2A5D0DD48EF7"
+               BlueprintIdentifier = "AE551411955E133ED36628B4B9B18DD0"
                BuildableName = "Pods_GeographyTweet.framework"
                BlueprintName = "Pods-GeographyTweet"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A095CFF7F6613374D1EE2A5D0DD48EF7"
+            BlueprintIdentifier = "AE551411955E133ED36628B4B9B18DD0"
             BuildableName = "Pods_GeographyTweet.framework"
             BlueprintName = "Pods-GeographyTweet"
             ReferencedContainer = "container:Pods.xcodeproj">
